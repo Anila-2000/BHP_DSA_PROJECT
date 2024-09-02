@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangalore House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bangalore House Price Prediction</h1>
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="location">Location</label>
+                <select name="location" id="location" required>
+                    {% for loc in locations %}
+                        <option value="{{ loc }}">{{ loc }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="total_sqft">Total Sqft</label>
+                <input type="text" name="total_sqft" id="total_sqft" autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <label for="bath">Bath</label>
+                <div class="switch-field" id="bath">
+                    {% for i in range(1, 6) %}
+                        <input type="radio" id="bath{{ i }}" name="bath" value="{{ i }}" required>
+                        <label for="bath{{ i }}">{{ i }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bhk">BHK</label>
+                <div class="switch-field" id="bhk">
+                    {% for i in range(1, 6) %}
+                        <input type="radio" id="bhk{{ i }}" name="bhk" value="{{ i }}" required>
+                        <label for="bhk{{ i }}">{{ i }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+            <button type="submit">Predict Price</button>
+        </form>
+    </div>
+</body>
+</html>
